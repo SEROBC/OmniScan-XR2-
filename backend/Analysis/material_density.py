@@ -8,7 +8,19 @@ import os
 
 class SpectralAnalyzer:
     def __init__(self):
-        lib_path = os.path.join(os.path.dirname(__file__), '../Data/spectral_lib.json')
+        # Use absolute path relative to this file's location
+        backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        lib_path = os.path.join(backend_dir, 'Data', 'spectral_lib.json')
+        
+        # Fallback to root-level Data if backend Data doesn't exist
+        if not os.path.exists(lib_path):
+            root_lib = os.path.join(os.path.dirname(backend_dir), 'Data', 'spectral_lib.json')
+            if os.path.exists(root_lib):
+                lib_path = root_lib
+        
+        if not os.path.exists(lib_path):
+            raise FileNotFoundError(f"Spectral library not found at {lib_path}")
+            
         with open(lib_path, 'r') as f:
             self.library = json.load(f)
 

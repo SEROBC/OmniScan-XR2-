@@ -28,21 +28,19 @@ NASA_URL = os.getenv("NASA_API_URL")
 @app.route("/scan/<lat>/<lon>")
 def get_mineral_data(lat, lon):
     """
-    Simulates a hyperspectral check against NASA EMIT data.
-    Logic: SWIR1/SWIR2 ratio for Gold detection.
+    Fetches real hyperspectral data from NASA EMIT for the given coordinates.
+    Uses SWIR1/SWIR2 ratio for Gold, Alunite, and other mineral detection.
     """
-    logger.info(f"Pinging NASA at {NASA_URL} for coordinates: {lat}, {lon}")
-
-    return jsonify(
-        {
-            "status": "active",
-            "minerals": {
-                "gold_probability": 0.84,
-                "diamond_indicator": 0.12,
-            },
-            "source": "NASA_EMIT_2026",
-        }
-    )
+    from Scripts.nasa_fetcher import NasaEarthData
+    from Analysis.material_density import SpectralAnalyzer
+    
+    logger.info(f"🛰️ Querying NASA EMIT for coordinates: {lat}, {lon}")
+    
+    try:
+        nasa_client = NasaEarthData()
+        emit_data = nasa_client.fetch_emit_data(float(lat), float(lon))
+        
+        if emit_data.get("status") != "success":\n            return jsonify({\n                "status\": \"error\",\n                "message\": emit_data.get(\"message\", \"Failed to fetch EMIT data\"),\n                \"error\": emit_data.get(\"error\")\n            }), 503\n        \n        # Extract spectral bands\n        spectral_data = emit_data.get(\"spectral_data\", {})\n        swir1 = spectral_data.get(\"SWIR1\", 0.35)\n        swir2 = spectral_data.get(\"SWIR2\", 0.28)\n        \n        analyzer = SpectralAnalyzer()\n        minerals = analyzer.analyze_signature(swir1, swir2)\n        \n        logger.info(f\"✅ Detected {len(minerals)} mineral signatures at {lat},{lon}\")\n        \n        return jsonify({\n            \"status\": \"success\",\n            \"source\": \"NASA_EMIT_2026\",\n            \"coordinates\": {\"latitude\": lat, \"longitude\": lon},\n            \"scene_metadata\": emit_data.get(\"primary_scene\"),\n            \"spectral_bands\": spectral_data,\n            \"minerals_detected\": minerals,\n            \"gold_probability\": max([m.get(\"confidence\", 0) for m in minerals if \"Gold\" in m.get(\"mineral\", \"\")], default=0),\n            \"diamond_indicator\": max([m.get(\"confidence\", 0) for m in minerals if \"Diamond\" in m.get(\"mineral\", \"\")], default=0),\n        })\n    except Exception as e:\n        logger.error(f\"Error fetching EMIT data: {str(e)}\")\n        return jsonify({\"status\": \"error\", \"message\": str(e)}), 500
 
 
 @app.route("/relay/lidar", methods=["POST"])

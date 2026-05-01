@@ -4,7 +4,23 @@
             "outputFile": "com.omniscan.xr.app-mergeDebugResources-38:/values-v21/values-v21.xml",
             "map": [
                 {
-                    "source": "/home/codespace/.gradle/caches/transforms-4/9bf5fbeb7b1c15530262ac83048641d8/transformed/core-1.13.0/res/values-v21/values-v21.xml",
+                    "source": "/home/codespace/.gradle/caches/9.4.0/transforms/95dc2a98a1ba3786b16aa3bd1918c2e5/transformed/core-1.13.0/res/values-v21/values-v21.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,13",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,173,237,304,368,484,610,736,864,1036",
+                        "endLines": "2,3,4,5,6,7,8,9,12,17",
+                        "endColumns": "117,63,66,63,115,125,125,127,12,12",
+                        "endOffsets": "168,232,299,363,479,605,731,859,1031,1383"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/home/codespace/.gradle/daemon/9.4.0/com.omniscan.xr.app-mergeDebugResources-38:/values-v21/values-v21.xml",
+            "map": [
+                {
+                    "source": "/home/codespace/.gradle/caches/9.4.0/transforms/95dc2a98a1ba3786b16aa3bd1918c2e5/transformed/core-1.13.0/res/values-v21/values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",

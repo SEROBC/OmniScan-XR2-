@@ -4,17 +4,28 @@
 
 # OmniScan-XR System - Copyright (c) 2026 Serob Cholakyan
 
-# This code is protected under the OmniScan-XR Proprietary License.
-
-# Commercial use or unauthorized field mining operations are strictly prohibited.
-
 # ==============================================================================
 
 import json
 import numpy as np
+import os
 
 class SpectralAnalyzer:
-    def __init__(self, lib_path="../Data/spectral_lib.json"):
+    def __init__(self, lib_path=None):
+        if lib_path is None:
+            # Try multiple locations
+            candidates = [
+                os.path.join(os.path.dirname(__file__), '../Data/spectral_lib.json'),
+                os.path.join(os.path.dirname(__file__), 'Data/spectral_lib.json'),
+                os.path.join(os.path.dirname(__file__), '../backend/Data/spectral_lib.json'),
+            ]
+            for candidate in candidates:
+                if os.path.exists(candidate):
+                    lib_path = candidate
+                    break
+            else:
+                raise FileNotFoundError(f"Spectral library not found in {candidates}")
+        
         with open(lib_path, 'r') as f:
             self.library = json.load(f)
 

@@ -4,7 +4,29 @@
             "outputFile": "com.omniscan.xr.app-mergeDebugResources-38:/values-id/values-id.xml",
             "map": [
                 {
-                    "source": "/home/codespace/.gradle/caches/transforms-4/ca1b2ddfc0f22d10233ef6f7bb319283/transformed/core-1.42.0/res/values-id/values.xml",
+                    "source": "/home/codespace/.gradle/caches/9.4.0/transforms/c0df21db742018abd940da64d65bfdfb/transformed/core-1.42.0/res/values-id/values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8",
+                        "startColumns": "0,0,0,0,0",
+                        "startOffsets": "190,236,288,401,515",
+                        "endColumns": "45,51,112,113,84",
+                        "endOffsets": "235,287,400,514,599"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,105,161,278,396",
+                        "endColumns": "49,55,116,117,88",
+                        "endOffsets": "100,156,273,391,480"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/home/codespace/.gradle/daemon/9.4.0/com.omniscan.xr.app-mergeDebugResources-38:/values-id/values-id.xml",
+            "map": [
+                {
+                    "source": "/home/codespace/.gradle/caches/9.4.0/transforms/c0df21db742018abd940da64d65bfdfb/transformed/core-1.42.0/res/values-id/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8",
                         "startColumns": "0,0,0,0,0",
