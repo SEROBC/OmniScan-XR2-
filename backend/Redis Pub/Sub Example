@@ -1,0 +1,6 @@
+import redis
+
+r = redis.Redis()
+
+def publish_detection(data):
+    r.publish("xr2_stream", str(data))
