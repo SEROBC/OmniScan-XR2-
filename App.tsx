@@ -9,6 +9,39 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { View, Text, Button, Image } from "react-native";
+import React, { useState } from "react";
+
+export default function App() {
+  const [result, setResult] = useState(null);
+
+  const uploadImage = async (e: any) => {
+    const file = e.target.files[0];
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    const res = await fetch("http://127.0.0.1:5000/scan", {
+      method: "POST",
+      headers: {
+        Authorization: "XR2-AUTH-TOKEN"
+      },
+      body: formData
+    });
+
+    const data = await res.json();
+    setResult(data);
+  };
+
+  return (
+    <div style={{ padding: 20 }}>
+      <h1>XR2 Detection System</h1>
+
+      <input type="file" onChange={uploadImage} />
+
+      <pre>{JSON.stringify(result, null, 2)}</pre>
+    </div>
+  );
+}
 
 export default function App() {
   const [frame, setFrame] = useState<string | null>(null);
