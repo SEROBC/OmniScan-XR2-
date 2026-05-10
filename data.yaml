@@ -1,0 +1,7 @@
+train: dataset/images
+val: dataset/images
+
+names:
+  0: metal
+  1: weapon
+  2: device
