@@ -1,40 +1,37 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  Button,
-  StyleSheet,
-  TextInput
-} from "react-native";
+import { View, Text, Button, Image } from "react-native";
 
 export default function App() {
   const [frame, setFrame] = useState<string | null>(null);
-  const [token, setToken] = useState("");
-  const [status, setStatus] = useState("Disconnected");
-
-  const SERVER = "ws://192.168.1.100:5000/ws";
+  const [connected, setConnected] = useState(false);
 
   const connect = () => {
-    const ws = new WebSocket(SERVER);
+    const ws = new WebSocket("ws://192.168.1.100:5000/ws");
 
-    ws.onopen = () => setStatus("Connected");
+    ws.onopen = () => setConnected(true);
 
-    ws.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      setFrame("data:image/jpeg;base64," + data.frame);
+    ws.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      setFrame(`data:image/jpeg;base64,${data.frame}`);
     };
-
-    ws.onerror = () => setStatus("Error");
-    ws.onclose = () => setStatus("Closed");
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>XR2 Vision System</Text>
-      <Text>Status: {status}</Text>
+    <View style={{ padding: 20 }}>
+      <Text>XR2 MAX+</Text>
+      <Text>Status: {connected ? "ONLINE" : "OFFLINE"}</Text>
 
-      <Button title="Connect Camera" onPress={connect} />
+      <Button title="Start Vision" onPress={connect} />
+
+      {frame && (
+        <Image
+          source={{ uri: frame }}
+          style={{ width: "100%", height: 400 }}
+        />
+      )}
+    </View>
+  );
+}      <Button title="Connect Camera" onPress={connect} />
 
       {frame && (
         <Image source={{ uri: frame }} style={styles.image} />
