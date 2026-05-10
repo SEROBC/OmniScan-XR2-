@@ -49,4 +49,5 @@ sudo apt install python3-pip
 pip install fastapi uvicorn opencv-python
 python main.py
 
-
+kubectl apply -f k8s-deployment.yaml
+kubectl apply -f k8s-service.yaml
