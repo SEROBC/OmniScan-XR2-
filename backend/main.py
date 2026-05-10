@@ -1,40 +1,15 @@
-from fastapi import FastAPI, Header, UploadFile, File, WebSocket
-from pydantic import BaseModel
-import uvicorn
-import asyncio
-
-from auth import create_token, verify_token
-from nasa import fetch_emit
-from detection import detect_objects
-from websocket import stream
+from fastapi import FastAPI
+from routes import auth, scan, websocket
 
 app = FastAPI()
 
-# ===== MODELS =====
-class AuthRequest(BaseModel):
-    api_key: str
+app.include_router(auth.router)
+app.include_router(scan.router)
+app.include_router(websocket.router)
 
-class ScanRequest(BaseModel):
-    query: str
-    lat: float = None
-    lon: float = None
-
-
-# ===== AUTH =====
-@app.post("/auth")
-def auth(data: AuthRequest):
-    token = create_token(data.api_key)
-    return {"token": token}
-
-
-# ===== TEXT SCAN =====
-@app.post("/scan")
-async def scan(data: ScanRequest, authorization: str = Header(None)):
-    verify_token(authorization)
-
-    nasa_task = None
-    if data.lat and data.lon:
-        nasa_task = asyncio.to_thread(fetch_emit, data.lat, data.lon)
+@app.get("/")
+def root():
+    return {"status": "XR2 MAX SYSTEM ONLINE"}        nasa_task = asyncio.to_thread(fetch_emit, data.lat, data.lon)
 
     # simple logic
     detected = "metal" in data.query.lower()
