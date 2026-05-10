@@ -14,7 +14,7 @@ Your OmniScan-XR2 app now has **100% NASA EMIT satellite integration** enabled. 
 
 ---
 
-## Your NASA Credentials
+## NASA Credentials
 
 **User:** `serob_holakyan`  
 **Token:** `eyJ0eXAiOiJKV1QiLCJvcmlnaW4iOiJFYXJ0aGRhdGEgTG9naW4iLCJzaWciOiJlZGxqd3RwdWJrZXlfb3BzIiwiYWxnIjoiUlMyNTYifQ.eyJ0eXBlIjoiVXNlciIsInVpZCI6InNlcm9iX2hvbGFreWFuIiwiZXhwIjoxNzgyNzEwMzI5LCJpYXQiOjE3Nzc1MjYzMjksImlzcyI6Imh0dHBzOi8vdXJzLmVhcnRoZGF0YS5uYXNhLmdvdiIsImlkZW50aXR5X3Byb3ZpZGVyIjoiZWRsX29wcyIsImFjciI6ImVkbCIsImFzc3VyYW5jZV9sZXZlbCI6M30.OQwqebVogZQrE6mwGvM1lTnYHegFwC-Ib0rOzQ7ouErfHC4FcAeJf7uZZecZ7lNg0m0R9v-TqWKIbBABv1yXiugZPzpXvAPC8WPgZuTQRy0p6Yz8Ktvv7-dHSE_wxWX_dzftsnV0-Kpqn0v7L-GvRfcRTLunx-8cRuY-zrfqKYo2XTBA_2Tm1Iuw5sNECpkPSkuH_1anAhvZWVtfA8QSPtoivQiZrX8IRvADmx-QAYThThJA7Gf11fn6MN4PLdsIqgJMKS_pEZIXt7bJxc1ujQ1KlZpk2O8JoY_IHlOSKelUKGJFQSgXHOIgAygZIMwTELC2JDTHYRF1xYh9Y4Kg7w`  
@@ -304,5 +304,5 @@ python Core/fusion_core.py
 5. ✅ Capture field survey data
 6. ✅ Verify mineral detections against NASA EMIT
 
-Your app is now **production-ready** for geological surveying! 🎉
+App is now **production-ready** for geological surveying! 🎉
 
