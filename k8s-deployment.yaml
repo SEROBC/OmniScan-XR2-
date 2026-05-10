@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xr2-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: xr2
+  template:
+    metadata:
+      labels:
+        app: xr2
+    spec:
+      containers:
+      - name: xr2
+        image: xr2-backend:latest
+        ports:
+        - containerPort: 5000
+        resources:
+          limits:
+            cpu: "2"
+            memory: "2Gi"
